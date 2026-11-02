@@ -50,16 +50,44 @@ Finish sections 1–8, then move to the lab. The final optional examples can wai
 
 ## 3. Do the TrailMix lab
 
-Read [the lab instructions and flow diagram](02-trailmix-reviews-lab/README.md).
-Fill three TODOs in `lab.py`, then run from the repository root:
+The lab is in **`02-trailmix-reviews-lab/`**:
 
-```sh
-python 02-trailmix-reviews-lab/lab.py
+```text
+02-trailmix-reviews-lab/
+  data/reviews.csv             Your 10 input reviews
+  lab.py                       The code you edit and run
+  output/triaged_reviews.csv   Your results, created after a successful run
 ```
 
-Open `02-trailmix-reviews-lab/output/triaged_reviews.csv`. It should have
-10 rows, with high urgency first. Read the drafts before using them.
-`main` contains the student starter. The `solution` branch has the complete lab.
+1. Open [the lab instructions](02-trailmix-reviews-lab/README.md), then open
+   [lab.py](02-trailmix-reviews-lab/lab.py).
+2. Fill in the **three TODOs** using the basics notebook. Save the file.
+3. In the terminal, stay in the repository folder (the folder containing this
+   README). Use the virtual environment and `.env` key from step 1 above. Run:
+
+   ```sh
+   python 02-trailmix-reviews-lab/lab.py
+   ```
+
+4. Wait for the message **`Saved 10 reviews to ...`**.
+5. Open **`02-trailmix-reviews-lab/output/triaged_reviews.csv`** in your editor
+   or Excel. Check the 10 results, with high urgency first.
+
+The script creates the output folder and CSV automatically. Your results are
+saved **on your computer**, inside the lab's `output` folder. They do not appear
+on GitHub because generated CSVs are ignored. Running the script again replaces
+the previous CSV.
+
+If you see **`Complete TODO...`**, finish that TODO, save, and run the same command
+again. No results are written until the TODOs are complete and the run succeeds.
+
+<details>
+<summary>Instructor: completed lab</summary>
+
+`main` contains the student starter. The complete lab is on the
+[`solution` branch](https://github.com/HruthikKommuru/cwru-fall-2026-workshop-session-8/blob/solution/02-trailmix-reviews-lab/lab.py).
+
+</details>
 
 Each exercise keeps its model setting beside its setup code so it can be read
 on its own. Both use the same Gemini Flash model. No key goes in Python code.

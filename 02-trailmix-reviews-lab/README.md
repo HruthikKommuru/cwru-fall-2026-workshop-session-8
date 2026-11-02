@@ -64,20 +64,29 @@ there is no complaint. Keep safety details in that field: urgency depends on the
 
 ## Run and inspect
 
-Use the same virtual environment and root `.env` as the notebook. From the
-repository root, run:
+1. Open `02-trailmix-reviews-lab/lab.py` and finish the **three TODOs**. Save it.
+2. Open a terminal in the repository folder, where the main README is. Use the
+   same virtual environment and `.env` key as the basics notebook.
+3. Run:
 
-```sh
-python 02-trailmix-reviews-lab/lab.py
-```
+   ```sh
+   python 02-trailmix-reviews-lab/lab.py
+   ```
 
-The script prints how many reviews it loaded, the first extracted facts, the
-first reply/urgency result, and where it saved the CSV. The 10 reviews use about
-30 model requests: extraction, reply, and urgency for each review. If you see a
-429 error, pause before retrying and reduce both batch concurrency settings to 1.
-You can temporarily keep just the first two input rows while checking your TODOs.
+4. Wait for **`Saved 10 reviews to ...`** in the terminal.
+5. Open **`02-trailmix-reviews-lab/output/triaged_reviews.csv`** in your editor or
+   Excel. Read all 10 results and check that urgent reviews come first.
 
-Open `output/triaged_reviews.csv`. It has these columns:
+The script creates the output folder and CSV for you. The file is saved on your
+computer in the lab's `output` folder, rather than the repository's top level.
+It is ignored by Git, so you will not see your generated results on GitHub.
+Running the script again replaces the CSV.
+
+If the terminal says **`Complete TODO...`**, finish that TODO, save, and run again.
+If you see **429**, wait before retrying and lower both batch concurrency values
+to 1. Processing all 10 reviews uses about 30 model requests.
+
+Your CSV has these columns:
 
 | Column | Value |
 | --- | --- |
