@@ -1,51 +1,11 @@
 review_id,product,rating,review_text
-R001,Camping stove,1,The fuel valve sticks open after I turn the knob off. Gas keeps hissing out; I stopped using it.
-R002,Daypack,5,Comfortable straps and enough room for lunch and a rain layer. No complaints after six walks.
-R003,Hiking boots,2,The left sole started peeling after two dry walks. I expected these to last longer.
-R004,Rain jacket,3,"Keeps light rain out, but feels stuffy on an uphill walk. Fine for standing around."
-R005,Headlamp,1,The battery compartment got so hot that the plastic melted and burned my finger.
-R006,Hiking socks,5,Warm without bunching inside my boots. Washed them twice and they still fit.
-R007,Two-person tent,2,One zipper jams at the corner. The fabric and poles seem fine.
-R008,Backpack,1,The shoulder buckle snapped under load on a steep trail and the pack fell onto my foot.
-R009,Water bottle,4,No leaks and easy to clean. I wish the lid were easier to open with gloves.
-R010,Trekking poles,3,They are poles. They arrived. Not sure what else to say until I use them.
-R011,Sleeping bag,5,Stayed cozy on a cool campsite night. The storage sack is roomy enough.
-R012,Camping stove,4,Boils a small pot quickly. The folding legs are handy on a flat picnic table.
-R013,Trail shoes,2,"Five-star blister factory, truly impressive. My heels were rubbed raw on the first walk."
-R014,Rain pants,3,The waist fits but the legs are much longer than expected. No damage or leaks.
-R015,Trekking poles,1,The locking section collapsed while supporting me downhill. I fell and scraped my knee.
-R016,Headlamp,4,Bright enough for a familiar path. The strap takes a moment to adjust.
-R017,Camping mug,5,A simple mug that keeps my drink warm. Exactly what I wanted.
-R018,Two-person tent,2,Rain dripped through a seam during a mild shower. Everything inside got damp.
-R019,Hiking boots,3,"Still deciding. They feel different from my old pair, but I have no specific complaint."
-R020,Water filter,1,The filter housing split during use. Dirty water bypassed the cartridge and I drank some before noticing.
-R021,Backpack,4,Fits my weekend kit well. The outside pocket could be a little deeper.
-R022,Hiking socks,2,Both socks developed holes at the toes after three wears.
-R023,Rain jacket,5,"Light, packs small, and kept me dry during a long rainy walk."
-R024,Sleeping pad,3,"Comfortable on grass. A bit noisy when I turn over, but it stays inflated."
-R025,Camping lantern,1,The charging port sparked and caught the nearby cloth on fire. I unplugged it immediately.
-R026,Daypack,3,"Looks all right. Have not taken it outdoors yet, so this is only a first impression."
-R027,Camping stove,2,"The ignition button does nothing. It lights with a separate lighter, but that is frustrating."
-R028,Trail shoes,5,Good grip on dry paths and comfortable out of the box.
-R029,Water bottle,2,The cap seal leaks when the bottle lies on its side in my bag.
-R030,Folding camp chair,1,The seat support broke while I was sitting down. A sharp metal edge cut my leg.
-R031,Two-person tent,4,Easy for one person to pitch. Two wide sleeping mats are a snug fit.
-R032,Headlamp,2,It shuts off every few minutes with fresh batteries. This happened while testing it at home.
-R033,Hiking socks,3,A little thicker than I prefer for summer. Otherwise they are fine.
-R034,Backpack,5,The hip belt spreads the weight nicely. No sore shoulders on my weekend walk.
-R035,Camping stove,1,"Flames shot out at the hose connection instead of the burner, even after checking the fitting."
-R036,Rain jacket,2,The cuff stitching came loose before the first wash. The rest looks well made.
-R037,Sleeping bag,4,Packs neatly and feels soft. The zipper pull is small with cold fingers.
-R038,Trekking poles,5,Easy to adjust and the handles feel comfortable over a full day.
-R039,Camping mug,3,It holds tea. That is the whole review. Nothing broken.
-R040,Daypack,2,"Love the surprise of a pocket zipper falling off on day two. Very convenient, obviously."
-R041,Water filter,4,Easy to squeeze and the directions were clear. Flow is a little slow but acceptable.
-R042,Trail shoes,3,Something feels off around the arch. I cannot tell whether I need a different size.
-R043,Rain pants,5,Kept my legs dry and fit over my hiking trousers without a struggle.
-R044,Sleeping pad,2,Slow air leak overnight on the living room floor. I cannot find the hole.
-R045,Camping lantern,4,Soft light for reading in the tent. Would like a lower brightness option.
-R046,Hiking boots,4,Supportive on uneven paths. Needed a few short walks to soften up.
-R047,Backpack,3,The color looks darker than the photo. Size is right and all the fasteners work.
-R048,Two-person tent,5,Weathered a breezy weekend well. Clear instructions and no missing parts.
-R049,Headlamp,3,"Okay, I guess. Ask me again after another trip; no actual fault to report yet."
-R050,Hiking socks,5,Ordered another pair because the first pair stayed comfortable all day.
+R001,Two-person tent,2,My two-person tent leaked during light rain on its first night.
+R002,Camping stove,1,The fuel valve sticks open and gas keeps escaping after I turn it off. I stopped using it.
+R003,Hiking socks,5,"Warm, comfortable, and no blisters after a long walk. No complaints."
+R004,Daypack,4,Comfortable straps and plenty of room for lunch and a rain jacket.
+R005,Hiking boots,2,The left sole is peeling after two short walks on dry paths.
+R006,Rain jacket,3,"Keeps light rain out, but feels stuffy when walking uphill."
+R007,Headlamp,1,The battery compartment overheated and melted the plastic. It burned my finger.
+R008,Water bottle,2,The cap leaks whenever I put the bottle on its side in my bag.
+R009,Tent,1,Wonderful surprise: the zipper broke on the first use. Just what I needed.
+R010,Trekking poles,3,"Still deciding. They feel different from my old pair, but nothing is broken."

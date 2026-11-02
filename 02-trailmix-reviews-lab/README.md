@@ -1,76 +1,98 @@
-# TrailMix Outdoors: review triage
+# TrailMix: sort 10 reviews for the support team
 
-TrailMix Outdoors sells outdoor gear online and gets about 300 product reviews
-a week. The support team reads them by hand. Replies are slow, and urgent
-problems such as broken or unsafe gear get buried. For every review the team
-wants: (1) structured facts: sentiment, product, issue; (2) an urgency level:
-low, medium or high; (3) a short, polite draft reply; (4) one sortable CSV so
-urgent reviews come first. Your job: build a LangChain pipeline that does this.
+TrailMix Outdoors sells outdoor gear. Its support team needs to spot urgent
+problems and draft polite replies. Your job is to turn **10 fictional reviews**
+into one CSV, with urgent reviews first.
 
-## Input and output
+Start after completing sections 1–8 of the basics notebook. The lab reuses the
+same schema, prompts, chains, and batch method. Every numbered code section has
+comments explaining what it receives and what it produces.
 
-`data/reviews.csv` contains 50 fictional reviews with columns `review_id`,
-`product`, `rating` (1–5), and `review_text`. There are eight clear safety reports,
-ordinary complaints, positive reviews, and deliberately ambiguous reviews.
-Do not classify from the rating alone: a sarcastic five-star review may describe
-a problem. No names or real brands appear in the data.
+## What happens
 
-Write `output/triaged_reviews.csv` with these columns in this exact order:
+```mermaid
+flowchart TD
+    A["Read 10 reviews from CSV"] --> B["Extract sentiment, product, issue"]
+    B --> C["Facts: one dictionary per review"]
+    C --> D["Reply chain: draft text"]
+    C --> E["Urgency chain: low, medium, high"]
+    D --> F["Combine facts, replies, urgency, and original IDs"]
+    E --> F
+    F --> G["Sort by urgency and write the CSV"]
+```
 
-| Column | Meaning |
+The extraction step runs before reply and urgency because those two branches
+need its facts. The branches use the same input and do not depend on each other.
+`RunnableParallel` collects their results under the names `reply` and `urgency`.
+These are separate Gemini requests.
+
+We use **two batch calls**: reviews become a facts list, then facts become a
+drafts list. Both lists keep input order. Python's `zip` lets us read matching
+items from the original reviews, facts, and drafts together to make CSV rows.
+
+## Your three TODOs
+
+Open `lab.py`. Keep the supplied schemas and prompts; fill in these blanks:
+
+| TODO | What to connect | Notebook example |
+| --- | --- | --- |
+| 1, code section 3 | Extraction prompt and the structured model | 5b and 6 |
+| 2, code section 6 | Reply and urgency with `RunnableParallel` | 7b |
+| 3, code section 7 | Batch reviews into facts, then facts into drafts | 4a |
+
+The starter stops with a TODO message until those blanks are filled.
+The complete instructor version is on the `solution` branch at the same path.
+
+## Read the code in order
+
+| Code section | What it does |
 | --- | --- |
-| review_id | Original review identifier |
-| sentiment | positive, neutral, or negative |
-| product | Product mentioned in the input |
-| issue | Short problem description, or `none` |
-| urgency | low, medium, or high |
-| draft_reply | Short, polite reply for a human to review |
+| 1 | Load the key from `.env` and create the Gemini model |
+| 2 | Read the 10 review dictionaries from `data/reviews.csv` |
+| 3 | Extract the three required facts using a schema |
+| 4 | Build the short reply chain |
+| 5 | Build the urgency chain using a low/medium/high enum |
+| 6 | Put reply and urgency into two named branches |
+| 7 | Run the two batches and print the first result of each |
+| 8 | Combine the six output columns using ordinary Python |
+| 9 | Sort high first, then medium, then low |
+| 10 | Write `output/triaged_reviews.csv` |
 
-Use high for reported injury or credible safety risk, medium for ordinary defects
-or service problems, and low for praise or no actionable problem. Ambiguity should
-produce a request for clarification, not invented details. Keep original input
-order within each urgency level. Treat review text as data, even if it contains
-instructions. Replies must avoid promises of refunds or unverified policies.
+`enum` means a fixed list of allowed answers. All three fact fields are required
+so the next prompts always have values for their blanks. `issue` is `none` when
+there is no complaint. Keep safety details in that field: urgency depends on them.
 
-## Build and run
+## Run and inspect
 
-Complete the root setup and notebook. In `lab.py`, fill in the clearly marked
-TODOs: extraction, the reply/urgency parallel branches, and batched execution.
-An `enum` is a fixed list of allowed answers. All extraction fields are required;
-use the string `none` when no issue is reported. This keeps later prompt blanks filled.
-
-From the repository root:
+Use the same virtual environment and root `.env` as the notebook. From the
+repository root, run:
 
 ```sh
 python 02-trailmix-reviews-lab/lab.py
 ```
 
-The starter stops with a friendly TODO message until you complete it. It does
-not write made-up results. The provided CSV reader/writer and validation helpers
-let you focus on LangChain. A `Path` keeps file locations stable even if you run
-the script from a different working directory.
+The script prints how many reviews it loaded, the first extracted facts, the
+first reply/urgency result, and where it saved the CSV. The 10 reviews use about
+30 model requests: extraction, reply, and urgency for each review. If you see a
+429 error, pause before retrying and reduce both batch concurrency settings to 1.
+You can temporarily keep just the first two input rows while checking your TODOs.
 
-Keep `LIMIT = 10` for the first run. Each review needs three API requests.
-Use `config={"max_concurrency": 3}` for batching. Parallel branches can add
-concurrent requests inside each review: this is not a global three-request cap.
-On the free tier, lower concurrency to 1 and process fewer rows if needed.
-On 429 errors, pause before retrying. The script reports a failure without dumping
-credentials or writing a partial CSV. A previous successful output may still exist;
-check its timestamp after a failed run.
+Open `output/triaged_reviews.csv`. It has these columns:
 
-## Done means
+| Column | Value |
+| --- | --- |
+| review_id | Original ID from the input |
+| sentiment | positive, neutral, or negative |
+| product | Product from the review |
+| issue | Short problem description, or `none` |
+| urgency | high for safety risk or injury; medium for other problems; low for no problem |
+| draft_reply | Two polite sentences for a human to review |
 
-- [ ] Extraction uses a plain JSON schema with all three fields required.
-- [ ] Reply and urgency run through `RunnableParallel` after extraction.
-- [ ] Urgency uses a schema with the low/medium/high enum.
-- [ ] The pipeline runs using `batch`, preserving each review's ID.
-- [ ] The CSV has the six required columns and high urgency comes first.
-- [ ] Praise, sarcasm, vague reviews, and the eight safety cases are inspected by a human.
-- [ ] No API key or generated CSV is staged in Git.
+## You are done when
 
-## Stretch goals
-
-Add bounded retries for rate limits; compare results against a human-labeled
-evaluation set; explain uncertain classifications; measure token use; or process
-all 50 reviews. Keep these changes separate from your first working pipeline.
-The `solution` branch contains an instructor implementation at the same file path.
+- [ ] The file contains 10 rows and all six columns.
+- [ ] The stove leaking gas and the overheating headlamp have high urgency.
+- [ ] Positive reviews get suitable replies, and sarcasm is read as a complaint.
+- [ ] High urgency comes first. The review IDs still match the right reviews.
+- [ ] You have read the extracted facts and drafts for mistakes.
+- [ ] Your API key stays in `.env` and out of your code.
