@@ -101,7 +101,16 @@ def check_provider_adapter(provider):
             lab.review_schema, method="json_schema", include_raw=True
         ).invoke("Warm socks")
         assert diagnostic["parsed"] == FACTS and diagnostic["parsing_error"] is None
-    print("PASS: real Google adapter schema and include_raw parser paths, with fake generation.")
+
+    def malformed(self, messages, **kwargs):
+        return GenericFakeChatModel(messages=iter(["not JSON"]))._generate(messages)
+
+    with patch.object(type(provider), "_generate", malformed):
+        failed = provider.with_structured_output(
+            lab.review_schema, method="json_schema", include_raw=True
+        ).invoke("Malformed reply test")
+        assert failed["parsed"] is None and failed["parsing_error"] is not None
+    print("PASS: real Google adapter schema and include_raw success/failure parser paths, with fake generation.")
 
 
 def check_lab():
