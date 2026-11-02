@@ -3,8 +3,12 @@
 Learn LangChain essentials with the Gemini API. Start with a guided notebook,
 then build a review-triage pipeline for the fictional TrailMix Outdoors store.
 All 50 reviews are invented. Use Python 3.11.5+; Python 3.13 is the tested version.
-The latest IPython/ipykernel no longer support Python 3.10, and the pinned
-Beautiful Soup dependency requires at least Python 3.11.5.
+The pinned ipykernel requires Python 3.11+. The tested environment's supporting
+packages require at least Python 3.11.5.
+
+`requirements.txt` lists only the four direct workshop dependencies: LangChain
+with Gemini support, python-dotenv, Jupyter, and ipykernel. Pip installs their
+supporting packages automatically; those indirect versions can vary by install.
 
 ## Setup: macOS / Linux
 

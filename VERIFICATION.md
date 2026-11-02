@@ -15,16 +15,21 @@ Checked November 1, 2026 on macOS with Python 3.13.12.
 | notebook | 7.6.4 |
 | ipykernel | 7.4.0 |
 
-All installed application dependencies are pinned in `requirements.txt`.
-macOS/Unix-only dependencies have platform markers for Windows installs.
-Python 3.11.5 is the minimum allowed by these package metadata; only Python
+`requirements.txt` pins only the four direct workshop dependencies:
+`langchain[google-genai]`, `python-dotenv`, `jupyter`, and `ipykernel`.
+Pip resolves supporting packages automatically, so their versions may differ
+from this tested environment. Python 3.11.5 is the minimum allowed by the tested
+package metadata; only Python
 3.13.12 on macOS was executed. Windows and Linux instructions were reviewed,
 but not run on those operating systems.
 
 ## Passed checks
 
-- Installed the latest stable requested packages in `.venv`, then installed the
-  exact requirements into a second, fresh `output/verification-venv`.
+- Installed the requested packages in `.venv`, then verified the original full
+  version snapshot in a second, fresh `output/verification-venv`.
+- After simplifying requirements to four direct dependencies, installed them
+  into fresh `output/minimal-verification-venv`. `pip check` and the complete
+  main-branch offline smoke test pass there, including all 24 notebook code cells.
 - `python -m pip check` reports no broken requirements in both environments.
 - Registered the user kernel `session8`, displayed as **Session 8 (LangChain)**.
 - All imports and real Google model construction succeed without a network call.
