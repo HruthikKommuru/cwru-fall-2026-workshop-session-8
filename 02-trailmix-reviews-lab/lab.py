@@ -1,4 +1,4 @@
-"""TrailMix lab: complete three TODOs, then run this script with your Gemini key."""
+"""TrailMix reviews: run this complete example with your Gemini key."""
 
 import csv  # Read and write CSV files using Python's standard library.
 from pathlib import Path  # Locate the data folder next to this script.
@@ -37,9 +37,11 @@ extract_prompt = ChatPromptTemplate.from_messages([
      "Keep the product name. Include safety details in issue. Use 'none' for no complaint."),
     ("human", "Product: {product}\nRating: {rating}\nReview: {review_text}"),
 ])
-# TODO 1: Connect extract_prompt to model.with_structured_output(...).
+# Connect the prompt to Gemini with the required facts schema.
 # This chain takes one review dictionary and returns its three facts.
-extract_chain = None
+extract_chain = extract_prompt | model.with_structured_output(
+    review_schema, method="json_schema"
+)
 
 # 4. REPLY: use the extracted fields as blanks in a polite reply prompt.
 # The parser turns Gemini's AIMessage into plain text for the CSV.
@@ -66,19 +68,12 @@ urgency_chain = urgency_prompt | model.with_structured_output(
 
 # 6. PARALLEL: both branches receive the same extracted facts.
 # Name the branches reply and urgency, so we can read their answers by name.
-# TODO 2: Create RunnableParallel(reply=..., urgency=...).
-reply_and_urgency = None
-
-if extract_chain is None or reply_and_urgency is None:
-    raise SystemExit("Complete TODOs 1 and 2, then run again.")
+reply_and_urgency = RunnableParallel(reply=reply_chain, urgency=urgency_chain)
 
 # 7. BATCH: do extraction first, then send the facts to the two branches.
 # batch returns results in input order. That lets us match rows by position.
-# TODO 3: Replace each None with a .batch(..., config={"max_concurrency": 2}) call.
-facts = None  # Extract facts for the reviews list.
-drafts = None  # Run reply_and_urgency on the facts list.
-if facts is None or drafts is None:
-    raise SystemExit("Complete TODO 3, then run again.")
+facts = extract_chain.batch(reviews, config={"max_concurrency": 2})
+drafts = reply_and_urgency.batch(facts, config={"max_concurrency": 2})
 
 print("First extracted facts:", facts[0])
 print("First reply and urgency:", drafts[0])

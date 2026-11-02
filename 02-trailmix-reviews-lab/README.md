@@ -1,12 +1,13 @@
 # TrailMix: sort 10 reviews for the support team
 
 TrailMix Outdoors sells outdoor gear. Its support team needs to spot urgent
-problems and draft polite replies. Your job is to turn **10 fictional reviews**
-into one CSV, with urgent reviews first.
+problems and draft polite replies. This complete example turns **10 fictional
+reviews** into one CSV, with urgent reviews first.
 
-Start after completing sections 1–8 of the basics notebook. The lab reuses the
-same schema, prompts, chains, and batch method. Every numbered code section has
-comments explaining what it receives and what it produces.
+All code is ready to run on **`main`**. Add your Gemini key to `.env`, then run
+the script using the steps below. You do not need to edit any Python code.
+The example reuses the schema, prompts, chains, and batch method from the basics
+notebook. Numbered comments explain what each section receives and produces.
 
 ## What happens
 
@@ -30,19 +31,6 @@ We use **two batch calls**: reviews become a facts list, then facts become a
 drafts list. Both lists keep input order. Python's `zip` lets us read matching
 items from the original reviews, facts, and drafts together to make CSV rows.
 
-## Your three TODOs
-
-Open `lab.py`. Keep the supplied schemas and prompts; fill in these blanks:
-
-| TODO | What to connect | Notebook example |
-| --- | --- | --- |
-| 1, code section 3 | Extraction prompt and the structured model | 5b and 6 |
-| 2, code section 6 | Reply and urgency with `RunnableParallel` | 7b |
-| 3, code section 7 | Batch reviews into facts, then facts into drafts | 4a |
-
-The starter stops with a TODO message until those blanks are filled.
-The complete instructor version is on the `solution` branch at the same path.
-
 ## Read the code in order
 
 | Code section | What it does |
@@ -64,25 +52,23 @@ there is no complaint. Keep safety details in that field: urgency depends on the
 
 ## Run and inspect
 
-1. Open `02-trailmix-reviews-lab/lab.py` and finish the **three TODOs**. Save it.
-2. Open a terminal in the repository folder, where the main README is. Use the
+1. Open a terminal in the repository folder, where the main README is. Use the
    same virtual environment and `.env` key as the basics notebook.
-3. Run:
+2. Run:
 
    ```sh
    python 02-trailmix-reviews-lab/lab.py
    ```
 
-4. Wait for **`Saved 10 reviews to ...`** in the terminal.
-5. Open **`02-trailmix-reviews-lab/output/triaged_reviews.csv`** in your editor or
-   Excel. Read all 10 results and check that urgent reviews come first.
+3. When the terminal says **`Saved 10 reviews to ...`**, open
+   **`02-trailmix-reviews-lab/output/triaged_reviews.csv`** in your editor or Excel.
+   Read all 10 results and check that urgent reviews come first.
 
 The script creates the output folder and CSV for you. The file is saved on your
 computer in the lab's `output` folder, rather than the repository's top level.
 It is ignored by Git, so you will not see your generated results on GitHub.
 Running the script again replaces the CSV.
 
-If the terminal says **`Complete TODO...`**, finish that TODO, save, and run again.
 If you see **429**, wait before retrying and lower both batch concurrency values
 to 1. Processing all 10 reviews uses about 30 model requests.
 
@@ -97,7 +83,7 @@ Your CSV has these columns:
 | urgency | high for safety risk or injury; medium for other problems; low for no problem |
 | draft_reply | Two polite sentences for a human to review |
 
-## You are done when
+## Check the results
 
 - [ ] The file contains 10 rows and all six columns.
 - [ ] The stove leaking gas and the overheating headlamp have high urgency.
